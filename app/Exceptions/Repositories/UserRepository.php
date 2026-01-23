@@ -38,4 +38,3 @@
             return ['id' => $id, 'email' => $email, 'name' => $name];
         }
     }
-?>

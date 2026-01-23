@@ -20,4 +20,3 @@
             return ['email' => $email, 'password' => $password];
         }
     }
-?>
