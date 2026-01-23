@@ -28,6 +28,10 @@
                 throw new HttpException(422, 'name は必須です');
             }
 
-            return ['email' => $email, 'password' => $password, 'name' => $name];
+            return [
+                'email' => $email,
+                'password' => $password,
+                'name' => $name
+            ];
         }
     }

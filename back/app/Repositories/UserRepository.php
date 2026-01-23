@@ -31,10 +31,18 @@
                 'INSERT INTO users (email, password_hash, name) VALUES (:email, :ph, :name)'
             );
             // 아까 했던 곳에 정보 넣기
-            $stmt->execute([':email' => $email, ':ph' => $passwordHash, ':name' => $name]);
+            $stmt->execute([
+                ':email' => $email, 
+                ':ph' => $passwordHash, 
+                ':name' => $name
+            ]);
             // 지금 만드는 사람의 ID 받기
             $id = (int) $this -> pdo -> lastInsertId();
             // 밖에 나가도 되는 정보만 톨린다
-            return ['id' => $id, 'email' => $email, 'name' => $name];
+            return [
+                'id' => $id, 
+                'email' => $email, 
+                'name' => $name
+            ];
         }
     }

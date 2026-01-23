@@ -17,6 +17,8 @@
                 throw new HttpException(422, 'password は必須です');
             }
 
-            return ['email' => $email, 'password' => $password];
+            return [
+                'email' => $email,
+                'password' => $password];
         }
     }
