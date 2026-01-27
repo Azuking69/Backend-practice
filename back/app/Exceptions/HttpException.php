@@ -7,4 +7,3 @@
             parent::__construct($message);
         }
     }
->
