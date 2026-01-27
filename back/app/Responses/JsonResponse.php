@@ -2,8 +2,6 @@
     // JSON현식의 HTTP response 클라스 정의
     // -> API 대답을 동일
     class JsonResponse {
-
-
         // 대답 3개 만들기
         // ok method 만들기
         // 전하는 데이테 : array $data
