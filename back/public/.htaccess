@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# 実ファイル/実フォルダがあるならそのまま返す
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# それ以外は index.php に回す
+RewriteRule ^ index.php [L]
