@@ -33,4 +33,12 @@
           );
           JsonResponse:: ok($result);
       }
+
+    // Header를 읽기
+      public function me(): void {
+        $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+        $user = $this -> service -> getUserFromToken($authHeader);
+        JsonResponse::ok($user);
+    }
+
   }

@@ -72,7 +72,7 @@
                 hash_hmac(
                     'sha256',
                     $h . '.' . $p,
-                    $this->config['jwt_secret'],
+                    $this -> config['jwt_secret'],
                     true
                 )
             );
@@ -87,7 +87,7 @@
                 throw new HttpException(401, 'トークンの有効期限切れ');
             }
 
-            $user = $this->users->findById((int)$payload['sub']);
+            $user = $this -> users -> findById((int)$payload['sub']);
             if (!$user) {
                 throw new HttpException(401, 'ユーザーが存在しません');
             }
