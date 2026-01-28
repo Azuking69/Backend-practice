@@ -54,4 +54,14 @@
                 'name' => $name
             ];
         }
+
+        public function findById(int $id): ?array {
+            $stmt = $this->pdo->prepare(
+                'SELECT id, email, name, password_hash FROM users WHERE id = :id LIMIT 1'
+            );
+            $stmt->execute([':id' => $id]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row ?: null;
+        }
+
     }

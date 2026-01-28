@@ -36,24 +36,24 @@
 
     // Header를 읽기
     public function me(): void {
-        // まず $_SERVER から取る
+        // Authorization ヘッダ取得
         $auth = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
 
-        // 取れない環境もあるので getallheaders でも拾う
         if ($auth === '' && function_exists('getallheaders')) {
             $headers = getallheaders();
             $auth = $headers['Authorization'] ?? $headers['authorization'] ?? '';
         }
 
-        if (!preg_match('/^Bearer\s+(.+)$/', $auth, $m)) {
-            throw new HttpException(401, 'トークンが不正です');
-        }
+        // Serviceに「Bearer ...」をそのまま渡す
+        $user = $this->service->getUserFromToken($auth);
 
-        $token = $m[1];
+        // 公開して良い情報だけ返す
+        $publicUser = [
+            'id' => (int)$user['id'],
+            'email' => $user['email'],
+            'name' => $user['name'],
+        ];
 
-        $user = $this->service->me($token);
-        JsonResponse::ok($user);
+        JsonResponse::ok($publicUser);
     }
-
-
   }
