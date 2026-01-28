@@ -18,6 +18,12 @@
             $controller -> login();
             exit;
         }
+
+        if ($method === 'GET' && $path === '/me') {
+            $controller->me();
+            exit;
+        }
+
         // 어느 if에 안 맞으면 오류
         JsonResponse::error(404, 'Not Found');
     };
