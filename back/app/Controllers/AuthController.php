@@ -35,10 +35,25 @@
       }
 
     // Header를 읽기
-      public function me(): void {
-        $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
-        $user = $this -> service -> getUserFromToken($authHeader);
+    public function me(): void {
+        // まず $_SERVER から取る
+        $auth = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+
+        // 取れない環境もあるので getallheaders でも拾う
+        if ($auth === '' && function_exists('getallheaders')) {
+            $headers = getallheaders();
+            $auth = $headers['Authorization'] ?? $headers['authorization'] ?? '';
+        }
+
+        if (!preg_match('/^Bearer\s+(.+)$/', $auth, $m)) {
+            throw new HttpException(401, 'トークンが不正です');
+        }
+
+        $token = $m[1];
+
+        $user = $this->service->me($token);
         JsonResponse::ok($user);
     }
+
 
   }
