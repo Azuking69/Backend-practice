@@ -51,6 +51,50 @@
             ];
         }
 
+        // JWTからユーザーIDを取り出す
+        public function getUserFromToken(string $authHeader): array {
+            // Authorization: Bearer xxx.yyy.zzz
+            if (!str_starts_with($authHeader, 'Bearer ')) {
+                throw new HttpException(401, 'トークンが不正です');
+            }
+
+            $token = substr($authHeader, 7);
+            $parts = explode('.', $token);
+
+            if (count($parts) !== 3) {
+                throw new HttpException(401, 'トークン形式が不正です');
+            }
+
+            [$h, $p, $s] = $parts;
+
+            // 署名チェック
+            $expected = $this->b64url(
+                hash_hmac(
+                    'sha256',
+                    $h . '.' . $p,
+                    $this->config['jwt_secret'],
+                    true
+                )
+            );
+
+            if (!hash_equals($expected, $s)) {
+                throw new HttpException(401, '署名が不正です');
+            }
+
+            $payload = json_decode(base64_decode(strtr($p, '-_', '+/')), true);
+
+            if (!$payload || $payload['exp'] < time()) {
+                throw new HttpException(401, 'トークンの有効期限切れ');
+            }
+
+            $user = $this->users->findById((int)$payload['sub']);
+            if (!$user) {
+                throw new HttpException(401, 'ユーザーが存在しません');
+            }
+            return $user;
+        }
+
+
         private function issueJwt(int $userId): string {
             // 지금 시간 받기
             $now = time();
