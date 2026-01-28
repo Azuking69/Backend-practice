@@ -1,5 +1,8 @@
 RewriteEngine On
 
+# Authorization ヘッダを PHP に渡す（重要）
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
 # 実ファイル/実フォルダがあるならそのまま返す
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
