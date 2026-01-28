@@ -4,7 +4,8 @@
         // 정보를 받기
         $method = $_SERVER['REQUEST_METHOD'];
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
+        $path = rtrim($path, '/');
+       
         // 회원가입의 경우
         // POST로 '/auth/signup'까지 오면
         if ($method === 'POST' && $path === '/auth/signup') {

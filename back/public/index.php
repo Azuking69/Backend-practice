@@ -18,14 +18,12 @@
         $service = new AuthService($users, $config);
         $controller = new AuthController($service);
 
-        $method = $_SERVER['REQUEST_METHOD'];
-        $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        // Routes.php を呼ぶ
+        $routes = require __DIR__ . '/../routes/Routes.php';
+        $routes($controller);
+        exit;
 
-        if ($method === 'POST' && $path === '/auth/signup') { $controller -> signup(); exit; }
-        if ($method === 'POST' && $path === '/auth/login')  { $controller -> login();  exit; }
-
-        // 어느 길에 맞지 않으면 오류
-        JsonResponse:: error(404, 'Not Found');
+    // 어느 길에 맞지 않으면 오류
     } catch (HttpException $e) {
         JsonResponse:: error($e -> status, $e -> getMessage());
     } catch (Throwable $e) {
