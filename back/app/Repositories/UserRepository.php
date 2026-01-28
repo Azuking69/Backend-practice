@@ -21,6 +21,15 @@
             return $row ?: null;
         }
 
+        // password_hash를 톨리지 않는다
+        public function findById(int $id): ?array {
+            $stmt = $this->pdo->prepare('SELECT id, email, name FROM users WHERE id = :id LIMIT 1');
+            $stmt->execute([':id' => $id]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row ?: null;
+        }
+
+
         // DB에 사용자 정보를 저장
         // DB가 결정한 ID를 받기
         // 밖에 나가도 되는 정보만 톨린다
