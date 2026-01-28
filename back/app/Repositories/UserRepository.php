@@ -63,5 +63,4 @@
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             return $row ?: null;
         }
-
     }

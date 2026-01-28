@@ -81,9 +81,21 @@
                 throw new HttpException(401, '署名が不正です');
             }
 
-            $payload = json_decode(base64_decode(strtr($p, '-_', '+/')), true);
+            $payload = json_decode(
+                base64_decode(strtr($p, '-_', '+/')),
+                true
+            );
 
-            if (!$payload || $payload['exp'] < time()) {
+            // 🔒 ここを必ず入れる
+            if (!is_array($payload)) {
+                throw new HttpException(401, 'トークンが壊れています');
+            }
+
+            if (!isset($payload['exp'], $payload['sub'])) {
+                throw new HttpException(401, 'トークン内容が不正です');
+            }
+
+            if ($payload['exp'] < time()) {
                 throw new HttpException(401, 'トークンの有効期限切れ');
             }
 
