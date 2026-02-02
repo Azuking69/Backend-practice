@@ -1,15 +1,12 @@
 services:
+  services:
   app:
     build: .
     ports:
-      - "8080:80"
+      - "8000:8000"
     volumes:
       - ./:/var/www/html
-    env_file:
-      - .env
-    depends_on:
-      db:
-        condition: service_healthy
+    command: php -S 0.0.0.0:8000 -t public public/index.php
 
   db:
     image: mysql:8.0
