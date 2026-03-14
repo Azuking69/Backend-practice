@@ -1,21 +1,21 @@
 # 🚀 Backend-Project
 
-🇯🇵：会員登録とログイン機能を実装しながら、バックエンド構造を学習するためのPHP REST API練習プロジェクト。
-    Docker環境でPHPとMySQLを使用し、JWT認証ベースのログインシステムを実装する。
-   
-🇬🇧：A practice project to learn backend architecture by implementing user signup and login with a PHP REST API.  
-    Uses PHP and MySQL in a Docker environment and implements a JWT-based authentication system.
+🇯🇵：会員登録とログイン機能を実装しながら、バックエンド構造を学習するための PHP REST API 練習プロジェクト。  
+Docker 環境で PHP と MySQL を使用し、JWT 認証ベースのログインシステムを実装する。
 
-🇰🇷：회원가입과 로그인 기능을 구현하면서 백엔드 구조를 학습하기 위한 PHP REST API 연습 프로젝트.
-    Docker 환경에서 PHP와 MySQL을 사용하여 JWT 기반 인증 시스템을 구현한다.
+🇬🇧：A practice project to learn backend architecture by implementing user signup and login with a PHP REST API.  
+Uses PHP and MySQL in a Docker environment and implements a JWT-based authentication system.
+
+🇰🇷：회원가입과 로그인 기능을 구현하면서 백엔드 구조를 학습하기 위한 PHP REST API 연습 프로젝트.  
+Docker 환경에서 PHP와 MySQL을 사용하여 JWT 기반 인증 시스템을 구현한다.
 
 ---
 
 # 🎯 プロジェクト目的 / Project Purpose / 프로젝트 목적
 
-🇯🇵：バックエンド開発でよく使われる **Controller → Service → Repository 構造** を理解する。  
+🇯🇵：バックエンド開発でよく使われる **Controller → Service → Repository 構造** を理解する。
 
-🇬🇧：The goal is to understand the common backend architecture **Controller → Service → Repository**.  
+🇬🇧：The goal is to understand the common backend architecture **Controller → Service → Repository**.
 
 🇰🇷：백엔드 개발에서 자주 사용하는 **Controller → Service → Repository 구조**를 이해하는 것이다.
 
@@ -82,8 +82,8 @@ Database
 
 | Layer | 日本語 | English | 한국어 |
 |------|------|------|------|
-| Routes | URLを確認しControllerを呼び出す | Routes requests to controllers | URL 확인 후 Controller 호출 |
-| Controller | リクエストを受け取りServiceを呼ぶ | Receives request and calls Service | 요청을 받아 Service 실행 |
+| Routes | URLを確認し Controller を呼び出す | Routes requests to controllers | URL 확인 후 Controller 호출 |
+| Controller | リクエストを受け取り Service を呼ぶ | Receives request and calls Service | 요청을 받아 Service 실행 |
 | Service | ビジネスロジック処理 | Business logic layer | 비즈니스 로직 처리 |
 | Repository | DBアクセス | Database access layer | 데이터베이스 접근 |
 | Database | データ保存 | Data storage | 데이터 저장 |
@@ -137,7 +137,7 @@ BACKEND-PROJECT
 
 ## 👶 会員登録 / Signup / 회원가입
 
-POST /auth/signup
+POST `/auth/signup`
 
 ### Request
 
@@ -167,7 +167,7 @@ POST /auth/signup
 
 ## 🔐 ログイン / Login / 로그인
 
-POST /auth/login
+POST `/auth/login`
 
 ### Request
 
@@ -222,9 +222,9 @@ http://localhost:8000
 🇬🇧：This project helps learning the following concepts.  
 🇰🇷：이 프로젝트를 통해 다음을 학습할 수 있다.
 
-- Backend Layer Architecture  
-- REST API Design  
-- JWT Authentication  
-- Docker Development Environment  
-- PHP Namespace Structure  
+- Backend Layer Architecture
+- REST API Design
+- JWT Authentication
+- Docker Development Environment
+- PHP Namespace Structure
 - Repository Pattern
